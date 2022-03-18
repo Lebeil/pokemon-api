@@ -5,6 +5,10 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Hello, express3! 😎'))
 
-app.get('/api/pokemons/1', (req,res)=> res.send('Hello'))
+app.get('/api/pokemons/:id', (req,res)=> {
+    const id = req.params.id
+    res.send(`Vous avez demandé le pokémon n°${id}`)
+
+})
 
 app.listen(port, ()=> console.log(`Notre app node est démarré sur : http://localhost:${port}`))
