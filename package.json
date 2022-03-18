@@ -1,0 +1,22 @@
+{
+  "name": "pokemon-api",
+  "version": "1.0.0",
+  "description": "Project API pokemon.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lebeil/pokemon-api.git"
+  },
+  "author": "Liedel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lebeil/pokemon-api/issues"
+  },
+  "homepage": "https://github.com/Lebeil/pokemon-api#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
