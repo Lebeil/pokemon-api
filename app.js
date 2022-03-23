@@ -1,6 +1,7 @@
 const express = require("express")
 const morgan = require("morgan")
 const favicon = require('serve-favicon')
+const bodyParser = require('body-parser')
 const { success, getUniqueId } = require('./helper')
 let pokemons = require('./mock-pokemon')
 
@@ -11,6 +12,7 @@ const port = 3000
 app
     .use(favicon(__dirname + '/favicon.ico'))
     .use(morgan('dev'))
+    .use(bodyParser.json())
 // const logger = (req, res, next) => {
 //     console.log(`URL: ${req.url}`);
 //     next()
