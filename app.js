@@ -2,12 +2,49 @@ const express = require("express")
 const morgan = require("morgan")
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
+const { Sequelize, DataTypes } = require('sequelize')
 const { success, getUniqueId } = require('./helper')
 let pokemons = require('./mock-pokemon')
-const res = require("express/lib/response")
+const PokemonModel = require("./src/models/pokemon")
 
 const app = express()
 const port = 3000
+
+const sequelize = new Sequelize(
+    'Pokedex', //le nom de la base de donnée
+    'root', //identifiant
+    '', //mot de passe
+    {
+        host: 'localhost',
+        dialect: 'mariadb', //nom du driver
+        dialectOptions: {
+            timezone: 'Etc/GMT-2'
+        },
+        logging: false 
+    }
+)
+
+sequelize.authenticate()
+    .then(_ => console.log("La connexion à la base de données a bien été établie."))
+    .catch(error => console.error(`Impossible de se connecter à la base de données ${error}`))
+
+const Pokemon = PokemonModel(sequelize, DataTypes)
+
+sequelize.sync({force: true})
+    .then(_ => {
+        console.log('La base de données "Pokedex" a bien été synchronisée.')
+        
+        pokemons.map(pokemon => {
+            Pokemon.create({
+            name:pokemon.name,
+            hp: pokemon.hp,
+            cp: pokemon.cp,
+            picture: pokemon.picture,
+            types: pokemon.types.join()
+            }).then(bulbizarre => console.log(bulbizarre.toJSON()))
+        })    
+    })
+
 
 //middlewares
 app
