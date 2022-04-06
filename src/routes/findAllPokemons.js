@@ -11,6 +11,7 @@ module.exports = (app) => {
                         [Op.like]: `%${name}%` // 'name est le critère de la recherche
                     }
                 },
+                order: ['name'],
                 limit: 5 
             })
             .then(pokemons => {
