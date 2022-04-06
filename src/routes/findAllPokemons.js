@@ -10,7 +10,8 @@ module.exports = (app) => {
                     name: {
                         [Op.like]: `%${name}%` // 'name est le critère de la recherche
                     }
-                } 
+                },
+                limit: 5 
             })
             .then(pokemons => {
                 const message = `Il y a ${pokemons.length} pokémons qui correspondent au terme de recherche ${name}.`
